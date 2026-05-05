@@ -28,7 +28,9 @@ function Sidebar() {
           <Link to="/students" className="menu-item">
             All Students
           </Link>
-          <div className="menu-item">Add Student</div>
+          <Link to="/add-student" className="menu-item">
+            Add Student
+          </Link>
         </div>
       )}
 
