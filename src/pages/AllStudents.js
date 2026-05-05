@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_green.css";
 
 function AllStudents() {
   const [showForm, setShowForm] = useState(false);
   const [students, setStudents] = useState([]);
+  const [attendanceDate, setAttendanceDate] = useState(new Date());
+  const [attendance, setAttendance] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     className: ""
@@ -69,7 +73,7 @@ useEffect(() => {
       if (contentType && contentType.includes("application/json")) {
         newStudent = await response.json();
       } else {
-        const text = await response.text();
+        await response.text();
         newStudent = formData;
       }
 
@@ -91,6 +95,21 @@ useEffect(() => {
 
   const setStatus = (status) => {
     alert("Set status: " + status);
+  };
+
+  const handleStatusChange = (studentId, status) => {
+    setAttendance(prev => ({
+      ...prev,
+      [studentId]: status
+    }));
+  };
+
+  const getStats = () => {
+    const total = students.length;
+    const present = Object.values(attendance).filter(s => s === "present").length;
+    const absent = Object.values(attendance).filter(s => s === "absent").length;
+    const late = Object.values(attendance).filter(s => s === "late").length;
+    return { total, present, absent, late };
   };
 
   return (
@@ -173,7 +192,15 @@ useEffect(() => {
         </select>
 
         <div className="date-wrapper">
-          <input type="text" readOnly />
+          <Flatpickr
+            value={attendanceDate}
+            onChange={([date]) => setAttendanceDate(date)}
+            options={{
+              dateFormat: "d-M-Y",
+              defaultDate: "today"
+            }}
+            placeholder="Select Date"
+          />
           <span>📅</span>
         </div>
 
@@ -197,13 +224,22 @@ useEffect(() => {
             <td>{student.name}</td>
             <td>
               <div className="status">
-                <button onClick={() => setStatus(student.id, "present")} className="present">
+                <button 
+                  onClick={() => handleStatusChange(student.id, "present")} 
+                  className={`present ${attendance[student.id] === "present" ? "active" : ""}`}
+                >
                   Present
                 </button>
-                <button onClick={() => setStatus(student.id, "absent")} className="absent">
+                <button 
+                  onClick={() => handleStatusChange(student.id, "absent")} 
+                  className={`absent ${attendance[student.id] === "absent" ? "active" : ""}`}
+                >
                   Absent
                 </button>
-                <button onClick={() => setStatus(student.id, "late")} className="late">
+                <button 
+                  onClick={() => handleStatusChange(student.id, "late")} 
+                  className={`late ${attendance[student.id] === "late" ? "active" : ""}`}
+                >
                   Late
                 </button>
               </div>
@@ -213,7 +249,9 @@ useEffect(() => {
 </tbody>
       </table>
       <div className="footer">
-        <div>Total: 3 | Present: 0 | Absent: 0 | Late: 0</div>
+        <div>
+          Total: {getStats().total} | Present: {getStats().present} | Absent: {getStats().absent} | Late: {getStats().late}
+        </div>
         <button className="btn btn-primary">Save Attendance</button>
       </div>
     </div>
