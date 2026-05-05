@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   const [openMenu, setOpenMenu] = useState(null);
@@ -24,7 +25,9 @@ function Sidebar() {
 
       {openMenu === "students" && (
         <div className="submenu">
-          <div className="menu-item">All Students</div>
+          <Link to="/students" className="menu-item">
+            All Students
+          </Link>
           <div className="menu-item">Add Student</div>
         </div>
       )}
