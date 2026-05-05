@@ -89,6 +89,10 @@ useEffect(() => {
         <select>
           <option>Select Class</option>
           <option>Class 1</option>
+          <option>Class 2</option>
+          <option>Class 3</option>
+          <option>Class 4</option>
+          <option>Class 5</option>
         </select>
 
         <div className="date-wrapper">
@@ -113,6 +117,7 @@ useEffect(() => {
           <tr>
             <th>#</th>
             <th>Student Name</th>
+            <th>Class</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -122,6 +127,7 @@ useEffect(() => {
     <tr key={student.id}>
             <td>{index + 1}</td>
             <td>{student.name}</td>
+            <td>{student.className}</td>
             <td>
               <div className="status">
                 <button 
