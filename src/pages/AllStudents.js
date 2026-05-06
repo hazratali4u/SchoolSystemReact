@@ -35,10 +35,6 @@ useEffect(() => {
     setAttendance(newAttendance);
   };
 
-  const setStatus = (status) => {
-    alert("Set status: " + status);
-  };
-
   const handleStatusChange = (studentId, status) => {
     setAttendance(prev => ({
       ...prev,
