@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ isOpen, onNavigate }) {
   const [openMenu, setOpenMenu] = useState(null);
 
   const toggleMenu = (menu) => {
@@ -9,7 +9,7 @@ function Sidebar() {
   };
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? "active" : ""}`}>
       <h3>🏫 School Soft</h3>
 
       <div className="menu-item">📊 Dashboard</div>
@@ -25,10 +25,10 @@ function Sidebar() {
 
       {openMenu === "students" && (
         <div className="submenu">
-          <Link to="/students" className="menu-item">
+          <Link to="/students" className="menu-item" onClick={onNavigate}>
             All Students
           </Link>
-          <Link to="/add-student" className="menu-item">
+          <Link to="/add-student" className="menu-item" onClick={onNavigate}>
             Add Student
           </Link>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AddStudent() {
+function AddStudent({ onToggleSidebar }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -69,7 +69,7 @@ function AddStudent() {
   return (
     <div className="container">
       <div className="header">
-        <span className="menu-toggle">☰</span>
+        <button className="menu-toggle" type="button" onClick={onToggleSidebar}>☰</button>
         <h2>➕ Add New Student</h2>
       </div>
 

@@ -54,6 +54,7 @@ body {
     padding-top: 20px;
     transition: 0.3s;
     overflow-y: auto;
+    z-index: 1000;
 }
 
 .sidebar h3 {
@@ -109,6 +110,9 @@ body {
     display: none;
     font-size: 22px;
     cursor: pointer;
+    background: transparent;
+    border: 0;
+    padding: 0;
 }
 
 /* FILTERS */

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_green.css";
 
-function AllStudents() {
+function AllStudents({ onToggleSidebar }) {
   const [showForm, setShowForm] = useState(false);
   const [students, setStudents] = useState([]);
   const [attendanceDate, setAttendanceDate] = useState(new Date());
@@ -54,7 +54,7 @@ useEffect(() => {
     <div className="container">
 
       <div className="header">
-        <span className="menu-toggle">☰</span>
+        <button className="menu-toggle" type="button" onClick={onToggleSidebar}>☰</button>
         <h2>📘 Attendance Management</h2>
         <button className="btn btn-secondary" onClick={() => markAll("present")}>
           Mark All Present
