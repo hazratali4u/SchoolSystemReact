@@ -84,6 +84,12 @@ body {
     padding-left: 60px;
 }
 
+.menu-error {
+    color: #cbd5e1;
+    font-size: 12px;
+    padding: 8px 20px;
+}
+
 /* MAIN */
 .main {
     margin-left: 240px;
